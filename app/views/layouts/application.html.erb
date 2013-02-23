@@ -72,14 +72,14 @@
 					<%= yield %>
 					<div id="toolbar">
 						<div class="form-inline">
-							<button class="btn" onClick="getLocation()">
-								<i class="icon-map-marker"></i>
-							</button>
+							<a href="#" class="btn" onClick="getLocation()"> <i class="icon-map-marker"></i> </a>
 							<label>
 								<input type="text" id= "searchAddress" placeholder="Type in an address...">
-								<button class="btn" onClick="geocodeAddress()">
-									Go
-								</button> </label>
+								<a href="#" class="btn" onClick="geocodeAddress()"> Go </a> </label>
+							<a href="#" class="btn" onClick="getMarkers()"> Find Street Closures </a>
+							<label> Search Radius (miles): 
+								<input type="number" id="searchRadius" class="input-small">
+							</label>
 						</div>
 					</div>
 					<div id="map"></div>
