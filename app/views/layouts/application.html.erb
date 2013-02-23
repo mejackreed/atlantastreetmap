@@ -42,7 +42,7 @@
 	<body>
 
 		<div id="header" class="container-fluid">
-		<img src="assets/website_header.png">
+			<img src="assets/website_header.png">
 		</div>
 
 		<div class="container-fluid">
@@ -72,28 +72,60 @@
 						<a href="#" class="btn"><i class="icon-facebook-sign icon-2x"></i></a>
 						<a href="#" class="btn"><i class="icon-envelope icon-2x"></i></a>
 
-						<div>
-							<h4>Open Businesses</h4>
-						</div>
-					
 					</div><!--/.well -->
 				</div><!--/span-->
 
 			</div><!--/row-->
+			<div>
+				<h4>About</h4>
+				<div>
+					<p>
+						Even if you’re someone who likes surprises, nobody wants surprises trying to get from point a to point b. There’s
+						nothing more frustrating than hitting traffic that you are not ready for when you have somewhere to go. That’s
+						where Point A comes in.
+					</p>
 
-			<footer>
-				<p>
-					&copy; Company 2013
-				</p>
-			</footer>
+					<p>
+						Point A is a site designed to prepare Atlantans to find their way by alerting them of street closures, construction,
+						and traffic delays throughout the city.
+					</p>
 
-		</div>
-		<!-- /container -->
+					<p>
+						You can subscribe to our closure updates through social media or by joining our email list. You can also see an
+						overview of street closures throughout the city and the ones closest to wherever you’re trying to go.
+					</p>
 
-		<!-- Javascripts
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<%= javascript_include_tag "application" %>
-    <%= yield :footer_scripts -%>
+					<strong>Inspiration:</strong>
+
+					<p>
+						The inspiration for the project came from the Atlanta Streetcar initiative that connects East and West parts of
+						Atlanta’s downtown area. The Street Car construction has created disruptions for residents and commuters who
+						work and play in the area. Point A started as a response to the need for residents to be better informed about
+						construction for StreetCar.
+					</p>
+
+					<p>
+						You can learn more about the Street Car Initiative here: <a href="http://www.atlantadowntown.com/initiatives/atlanta-streetcar">http://www.atlantadowntown.com/initiatives/atlanta-streetcar</a>
+					</p>
+
+					The city’s report on closures here: <a href="http://www.atlantadowntown.com/initiatives/atlanta-streetcar/streetcar-utility-relocation">http://www.atlantadowntown.com/initiatives/atlanta-streetcar/streetcar-utility-relocation</a>
+
+					</p>
+				</div>
+
+				<footer>
+					<p>
+						Built at <a href="http://www.govathon.com">Govathon</a>
+					</p>
+				</footer>
+
+			</div>
+			<!-- /container -->
+
+			<!-- Javascripts
+			================================================== -->
+			<!-- Placed at the end of the document so the pages load faster -->
+			<%= javascript_include_tag "application" %>
+			<%= yield :footer_scripts -%>
 	</body>
 </html>
