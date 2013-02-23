@@ -1,24 +1,15 @@
 var map;
 var searchLocation;
+var markers = [];
 
-var yelp = {
-	"keys" : [{
-		"Consumer Key" : "FwDUGPdQY6P4ReAR6Zph0g"
-	}, {
-		"Consumer Secret" : "VHjpvwlVcwDk5ncL8Tj9jNtS97I"
-	}, {
-		"Token" : "yNq5aAO1hhuUWezb6bb_2zxai2b_5LsM"
-	}, {
-		"Token Secret" : "UcfASGXdFs4tJflgKAVWqqK0j2s"
-	}]
-}
 
 var construction = L.icon({
-	iconUrl : 'assets/construnction.png',
+	iconUrl : 'assets/construction.png',
+	//iconSize : [41, 65],
 });
 
 $(window).load(function() {
-	var h = $(window).height(), offsetTop = 200, mapOffsetTop = -20;
+	var h = $(window).height(), offsetTop = 400, mapOffsetTop = -20;
 	var w = $(window).width(), offsetLeft = 345;
 	$('#map').css('height', h - offsetTop)
 });
@@ -43,10 +34,9 @@ function geocodeAddress(input) { http://open.mapquestapi.com/geocoding/v1/addres
 	})
 }
 
-function getYelp() {
-	console.log(yelp.keys[0]['Consumer Key'])
+function getGoogle() {
 	$.ajax({
-		url : 'http://api.yelp.com/v2/search?term=food&location=San+Francisco&' + yelp.keys[0]['Consumer Key'],
+		url : 'https://maps.googleapis.com/maps/api/place/nearbysearch/output?json&query=food&location=' + searchLocation + "&key=AIzaSyDvesGbHTZewl2r-VzSJZ-tkdLpe2Wpyzw",
 		dataType : 'jsonp',
 		success : function(data) {
 			console.log(data)
@@ -71,25 +61,30 @@ function init() {
 
 function getPopupContent(data) {
 	popup = ""
-	//	popup += "<h4>" + data.type + "</h4>";
 	popup += "<p>" + data.road_closed + " closed from " + data.road_closed_from + " to " + data.road_closed_to + "</p>"
 	popup += "Ends: " + data.end_of_closure + "<br>";
 	popup += "<p>Share it! "
 	popup += '<a href="https://twitter.com/intent/retweet?tweet_id=' + data.tweet_id + '&related=twitterapi,twittermedia,twitter,support" class="btn" target=_blank><i class="icon-twitter-sign"></i></a> '
 	popup += '<a href="#" class="btn"><i class="icon-facebook-sign"></i></a>'
-	//popup += '<a href = "https://twitter.com/share" class = "twitter-share-button" data-lang="en" data-text="This is the point">Tweet</a>';
 	return popup
 }
 
 function addMarkers(data) {
 	_.each(data, function(data) {
-		//console.log(data)
-		L.marker([data.latitude, data.longitude], {
+		var streetClose = L.marker([data.latitude, data.longitude], {icon: construction
 		}).addTo(map).bindPopup(getPopupContent(data))
+		markers.push(streetClose)
 	})
 }
 
 function getMarkers() {
+	if (markers.length >0){
+		_.each(markers, function(marker){
+			map.removeLayer(marker)
+		})
+	}
+	markers = []
+	console.log(markers)
 	$.get('http://atlantastreetmap.herokuapp.com/road_closures', function(data) {
 		addMarkers(data)
 	})
@@ -116,54 +111,3 @@ function onLocationFound(e) {
 
 	L.circle(e.latlng, radius).addTo(map);
 }
-
-var staticData = [{
-	"created_at" : "2013-02-23T14:35:38Z",
-	"description" : "This road has had a tree fall on it.\r\n\r\nCrazy!",
-	"end_of_closure" : "2013-04-03",
-	"id" : 1,
-	"latitude" : 33.776446,
-	"longitude" : -84.379884,
-	"road_closed" : "Myrtle Street",
-	"road_closed_from" : "Ponce De Leon",
-	"road_closed_to" : "4th Street",
-	"tweet_id" : null,
-	"updated_at" : "2013-02-23T14:35:38Z"
-}, {
-	"created_at" : "2013-02-23T16:42:11Z",
-	"description" : "Godzilla attacked!",
-	"end_of_closure" : "2013-04-12",
-	"id" : 2,
-	"latitude" : 33.776276,
-	"longitude" : -84.382982,
-	"road_closed" : "Juniper Street",
-	"road_closed_from" : "10th Street",
-	"road_closed_to" : "Ponce De Leon",
-	"tweet_id" : "305356894371995650",
-	"updated_at" : "2013-02-23T16:42:11Z"
-}, {
-	"created_at" : "2013-02-23T16:45:44Z",
-	"description" : "Govathon has shut this party down!",
-	"end_of_closure" : "2013-03-03",
-	"id" : 3,
-	"latitude" : 33.748126,
-	"longitude" : -84.390664,
-	"road_closed" : "Trinity Ave",
-	"road_closed_from" : "Central Ave",
-	"road_closed_to" : "Washington Ave",
-	"tweet_id" : "305357786110369793",
-	"updated_at" : "2013-02-23T16:45:44Z"
-}, {
-	"created_at" : "2013-02-23T16:51:46Z",
-	"description" : "The street car is coming Atlanta! ARE YOU READY?",
-	"end_of_closure" : "2013-04-02",
-	"id" : 4,
-	"latitude" : 33.755539,
-	"longitude" : -84.38531,
-	"road_closed" : "Auburn Ave",
-	"road_closed_from" : "Peachtree Center",
-	"road_closed_to" : "Courtland St",
-	"tweet_id" : "305359303798300672",
-	"updated_at" : "2013-02-23T16:51:46Z"
-}]
-
