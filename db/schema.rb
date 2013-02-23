@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223035757) do
+ActiveRecord::Schema.define(:version => 20130223043132) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,5 +45,19 @@ ActiveRecord::Schema.define(:version => 20130223035757) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "road_closures", :force => true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "type"
+    t.date     "start_of_closure"
+    t.date     "end_of_closure"
+    t.string   "road_closed"
+    t.string   "road_closed_from"
+    t.string   "road_closed_to"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
 end

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  latitude: 1.5
+  longitude: 1.5
+  type: 
+  start_of_closure: 2013-02-22
+  end_of_closure: 2013-02-22
+  road_closed: MyString
+  road_closed_from: MyString
+  road_closed_to: MyString
+  description: MyText
+
+two:
+  latitude: 1.5
+  longitude: 1.5
+  type: 
+  start_of_closure: 2013-02-22
+  end_of_closure: 2013-02-22
+  road_closed: MyString
+  road_closed_from: MyString
+  road_closed_to: MyString
+  description: MyText
