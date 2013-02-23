@@ -1,4 +1,21 @@
 var map;
+var searchLocation;
+
+var yelp = {
+	"keys" : [{
+		"Consumer Key" : "FwDUGPdQY6P4ReAR6Zph0g"
+	}, {
+		"Consumer Secret" : "VHjpvwlVcwDk5ncL8Tj9jNtS97I"
+	}, {
+		"Token" : "yNq5aAO1hhuUWezb6bb_2zxai2b_5LsM"
+	}, {
+		"Token Secret" : "UcfASGXdFs4tJflgKAVWqqK0j2s"
+	}]
+}
+
+var construction = L.icon({
+	iconUrl : 'assets/construnction.png',
+});
 
 $(window).load(function() {
 	var h = $(window).height(), offsetTop = 200, mapOffsetTop = -20;
@@ -17,10 +34,21 @@ function geocodeAddress(input) { http://open.mapquestapi.com/geocoding/v1/addres
 			if (data.results.length > 0) {
 				var lat = data.results[0]['locations'][0]['displayLatLng']['lat']
 				var lng = data.results[0]['locations'][0]['displayLatLng']['lng']
+				searchLocation = [lat, lng]
 				map.setView([lat, lng], 15)
 				L.marker([lat, lng]).addTo(map)
-
 			}
+		}
+	})
+}
+
+function getYelp() {
+	console.log(yelp.keys[0]['Consumer Key'])
+	$.ajax({
+		url : 'http://api.yelp.com/v2/search?term=food&location=San+Francisco&' + yelp.keys[0]['Consumer Key'],
+		dataType : 'jsonp',
+		success : function(data) {
+			console.log(data)
 		}
 	})
 }
@@ -78,7 +106,7 @@ function getLocation() {
 
 function onLocationFound(e) {
 	var radius = e.accuracy / 2;
-
+	searchLocation = [e.latlng.lat, e.latlng.lng]
 	//L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();
 
 	L.circle(e.latlng, radius).addTo(map);
