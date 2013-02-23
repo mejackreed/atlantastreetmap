@@ -1,22 +1,25 @@
+<div id="map" style="width:1000px; height:500px; margin: 0 auto;"></div>
+
+<br>
+
 <%= semantic_form_for [:admin, @road_closure] do |f| %>
+  <%= f.hidden_field :latitude -%>
+  <%= f.hidden_field :longitude -%>
 
-<%= f.hidden_field :latitude -%>
-<%= f.hidden_field :longitude -%>
-
-<%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
-<%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
+  <%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
 
 
-<%= f.actions do %>
-<%= f.action :submit, :as => :button %>
-<%= f.action :cancel, :as => :link %>
-<% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button %>
+    <%= f.action :cancel, :as => :link %>
+  <% end %>
 
 <% end %>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 
-<div id="map" style="width:500px; height:500px;"></div>
+
 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
 <script type='text/javascript'>
 	function updateLatLon(lat, lon) {
 		jQuery('#road_closure_latitude').val(lat);
