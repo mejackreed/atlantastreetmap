@@ -7,7 +7,6 @@ gem 'rails', '3.2.12'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -25,9 +24,11 @@ end
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 
-
 gem 'activeadmin'
 gem "meta_search",    '>= 1.1.0.pre'
+
+# Let's not live in our own little world
+gem 'twitter'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
