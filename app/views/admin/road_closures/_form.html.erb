@@ -1,20 +1,46 @@
 <%= semantic_form_for [:admin, @road_closure] do |f| %>
 
-  <%= f.hidden_field :latitude -%>
-  <%= f.hidden_field :longitude -%>
+<%= f.hidden_field :latitude -%>
+<%= f.hidden_field :longitude -%>
 
-  <%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
+<%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
+<%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :button %>
-    <%= f.action :cancel, :as => :link %>
-  <% end %>
 
+<%= f.actions do %>
+<%= f.action :submit, :as => :button %>
+<%= f.action :cancel, :as => :link %>
 <% end %>
 
+<% end %>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+
+<div id="map" style="width:500px; height:500px;"></div>
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 <script type='text/javascript'>
-  function updateLatLon(lat, lon) {
-    jQuery('#road_closure_latitude').val(lat);
-    jQuery('#road_closure_longitude').val(lon);
-  }
+	function updateLatLon(lat, lon) {
+		jQuery('#road_closure_latitude').val(lat);
+		jQuery('#road_closure_longitude').val(lon);
+	}
+
+	var streetCar = [33.75444183019402, -84.38660860061646]
+
+	var map = L.map('map').setView(streetCar, 15);
+
+	L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
+		attribution : 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
+		key : 'BC9A493B41014CAABB98F0471D759707'
+	}).addTo(map);
+	
+	var marker;
+
+	map.on('click', function(e) {
+		if (marker != undefined){
+			map.removeLayer(marker)
+		}
+		updateLatLon(e.latlng.lat,e.latlng.lng)
+		marker = L.marker(e.latlng).addTo(map)
+		
+	})
+
 </script>
