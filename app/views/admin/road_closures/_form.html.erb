@@ -1,0 +1,9 @@
+<%= semantic_form_for [:admin, @road_closure] do |f| %>
+  <%= f.inputs :end_of_closure, :road_closed, :road_closed_from, :road_closed_to, :description %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button %>
+    <%= f.action :cancel, :as => :link %>
+  <% end %>
+
+<% end %>
