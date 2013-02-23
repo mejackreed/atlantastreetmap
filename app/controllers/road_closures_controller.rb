@@ -7,6 +7,7 @@ class RoadClosuresController < ApplicationController
   end
 
   def show
+    @road = RoadClosure.find_by_id(params[:id])
     render 'main/index'
   end
 end

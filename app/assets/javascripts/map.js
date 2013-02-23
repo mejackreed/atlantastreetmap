@@ -22,6 +22,7 @@ $(window).load(function() {
 	var w = $(window).width(), offsetLeft = 345;
 	$('#map').css('height', h - offsetTop)
 });
+
 function geocodeAddress(input) { http://open.mapquestapi.com/geocoding/v1/address?location=
 	var address = $('#searchAddress').val()
 	$.ajax({
@@ -89,11 +90,15 @@ function addMarkers(data) {
 }
 
 function getMarkers() {
-	console.log('data')
-	console.log('test')
 	$.get('http://atlantastreetmap.herokuapp.com/road_closures', function(data) {
 		addMarkers(data)
 	})
+}
+
+function openPopup(popup) {
+  var popup = L.popup()
+    .setLatLng([popup.latitude, popup.longitude])
+    .setContent(getPopupContent(popup)).openOn(map);
 }
 
 function getLocation() {

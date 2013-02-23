@@ -1,1 +1,9 @@
-
+<%= content_for :footer_scripts do %>
+  <script type='text/javascript'>
+    <% if params[:id] %>
+      jQuery(function($) {
+        openPopup( $.parseJSON('<%=raw @road.to_json -%>') );
+      });
+    <% end %>
+  </script>
+<% end %>
